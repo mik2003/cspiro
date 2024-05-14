@@ -1,34 +1,23 @@
 #include "matrix.h"
+#include "spirograph.h"
 
+#define _USE_MATH_DEFINES
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 int main()
 {
-    int n = 4;
-    int m = 3;
+    Mat2D t = angles(0, 2 * M_PI, 12);
+    Mat2D spiro = spirograph(1, 0.5, &t);
 
-    Mat2D mat1 = mat2d_new(n, m);
-    Mat2D mat2 = mat2d_new(n, m);
-    Mat2D mat_out;
+    printf("t =\n");
+    mat2d_print(&t);
+    printf("spiro =\n");
+    mat2d_print(&spiro);
 
-    // Assign values to m1 and m2
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j < m; ++j)
-        {
-            mat1.array[i][j] = i * 3 + j + 1;
-            mat2.array[i][j] = i * 3 + j + 1;
-        }
-    }
-    mat_out = mat2d_transpose(&mat1);
-    mat2d_print(&mat1);
-    printf("\n");
-    mat2d_print(&mat_out);
-
-    mat2d_free(&mat1);
-    mat2d_free(&mat2);
-    mat2d_free(&mat_out);
+    mat2d_free(&t);
+    mat2d_free(&spiro);
 
     return 0;
 }

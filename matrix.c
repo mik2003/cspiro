@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 float **arr2d_malloc(int n_rows, int n_cols)
 {
@@ -183,7 +184,7 @@ Mat2D mat2d_stack(Mat2D *mat1, Mat2D *mat2, int axis)
         {
             for (j = 0; j < n; j++)
             {
-                out.array[m + i][j] = mat1->array[i][j];
+                out.array[m + i][j] = mat2->array[i][j];
             }
         }
         break;
@@ -317,6 +318,78 @@ Mat2D mat2d_divide_float(Mat2D *mat, float f)
     return out;
 }
 
+Mat2D mat2d_add(Mat2D *mat1, Mat2D *mat2)
+{
+    Mat2D out;
+    // Wrong matrices shapes
+    if ((mat1->n_cols != mat2->n_cols) | (mat1->n_rows != mat2->n_rows))
+    {
+        out = mat2d_empty();
+        return out;
+    }
+
+    int m = mat1->n_rows;
+    int n = mat1->n_cols;
+
+    out.size = mat1->size;
+    out.n_rows = m;
+    out.n_cols = n;
+    out.array = arr2d_malloc(m, n);
+    if (out.array == NULL)
+    {
+        out = mat2d_empty();
+        return out;
+    }
+
+    int i;
+    int j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            out.array[i][j] = mat1->array[i][j] + mat2->array[i][j];
+        }
+    }
+
+    return out;
+}
+
+Mat2D mat2d_subtract(Mat2D *mat1, Mat2D *mat2)
+{
+    Mat2D out;
+    // Wrong matrices shapes
+    if ((mat1->n_cols != mat2->n_cols) | (mat1->n_rows != mat2->n_rows))
+    {
+        out = mat2d_empty();
+        return out;
+    }
+
+    int m = mat1->n_rows;
+    int n = mat1->n_cols;
+
+    out.size = mat1->size;
+    out.n_rows = m;
+    out.n_cols = n;
+    out.array = arr2d_malloc(m, n);
+    if (out.array == NULL)
+    {
+        out = mat2d_empty();
+        return out;
+    }
+
+    int i;
+    int j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            out.array[i][j] = mat1->array[i][j] - mat2->array[i][j];
+        }
+    }
+
+    return out;
+}
+
 Mat2D mat2d_multiply(Mat2D *mat1, Mat2D *mat2)
 {
     Mat2D out;
@@ -326,13 +399,14 @@ Mat2D mat2d_multiply(Mat2D *mat1, Mat2D *mat2)
         out = mat2d_empty();
         return out;
     }
+
     int m = mat1->n_rows;
     int n = mat1->n_cols;
     int p = mat2->n_cols;
+
     out.size = m * p;
     out.n_rows = m;
     out.n_cols = p;
-    // Allocate memory for the array
     out.array = arr2d_malloc(m, p);
     if (out.array == NULL)
     {
@@ -354,6 +428,56 @@ Mat2D mat2d_multiply(Mat2D *mat1, Mat2D *mat2)
                 sum += mat1->array[i][k] * mat2->array[k][j];
             }
             out.array[i][j] = sum;
+        }
+    }
+
+    return out;
+}
+
+Mat2D mat2d_sin(Mat2D *mat)
+{
+    Mat2D out;
+
+    int m = mat->n_rows;
+    int n = mat->n_cols;
+
+    out.size = mat->size;
+    out.n_rows = m;
+    out.n_cols = n;
+    out.array = arr2d_malloc(m, n);
+
+    int i;
+    int j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            out.array[i][j] = sin(mat->array[i][j]);
+        }
+    }
+
+    return out;
+}
+
+Mat2D mat2d_cos(Mat2D *mat)
+{
+    Mat2D out;
+
+    int m = mat->n_rows;
+    int n = mat->n_cols;
+
+    out.size = mat->size;
+    out.n_rows = m;
+    out.n_cols = n;
+    out.array = arr2d_malloc(m, n);
+
+    int i;
+    int j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            out.array[i][j] = cos(mat->array[i][j]);
         }
     }
 
