@@ -8,8 +8,18 @@
 
 int main()
 {
-    Mat2D t = angles(0, 2 * M_PI, 12);
-    Mat2D spiro = spirograph(1, 0.5, &t);
+    // Numerator of k fraction corresponds to the spirograph periodicity.
+    float l = 1.0;
+    int k_n = 1;
+    int k_d = 2;
+    float k = (float)k_n / k_d;
+    int precision = 12;
+
+    printf("l = %f\n", l);
+    printf("k = %f\n", k);
+
+    Mat2D t = angles(0, k_n * 2 * M_PI, precision * k_n);
+    Mat2D spiro = spirograph(l, k, &t);
 
     printf("t =\n");
     mat2d_print(&t);

@@ -6,14 +6,14 @@
 Mat2D angles(float ti, float tf, int n)
 {
     Mat2D out;
-    out.size = n;
+    out.size = n + 1;
     out.n_rows = 1;
-    out.n_cols = n;
-    out.array = arr2d_malloc(1, n);
+    out.n_cols = n + 1;
+    out.array = arr2d_malloc(1, n + 1);
 
     int i;
     float step = (tf - ti) / n;
-    for (i = 0; i < n; i++)
+    for (i = 0; i < n + 1; i++)
     {
         out.array[0][i] = ti + i * step;
     }
