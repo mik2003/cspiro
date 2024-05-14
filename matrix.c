@@ -63,44 +63,146 @@ Mat2D mat2d_empty()
     return out;
 }
 
-int mat2d_free(Mat2D *m)
+int mat2d_free(Mat2D *mat)
 {
     int i;
-    for (i = 0; i < m->n_rows; i++)
+    for (i = 0; i < mat->n_rows; i++)
     {
-        free(m->array[i]);
+        free(mat->array[i]);
     }
-    free(m->array);
+    free(mat->array);
     return 0;
 }
 
-int mat2d_print(Mat2D *m)
+int mat2d_print(Mat2D *mat)
 {
     int i;
     int j;
-    for (i = 0; i < m->n_rows; i++)
+    for (i = 0; i < mat->n_rows; i++)
     {
-        for (j = 0; j < m->n_cols; j++)
+        for (j = 0; j < mat->n_cols; j++)
         {
-            printf("%8.2f", m->array[i][j]);
+            printf("%8.2f", mat->array[i][j]);
         }
         printf("\n");
     }
     return 0;
 }
 
-Mat2D mat2d_mul(Mat2D *m1, Mat2D *m2)
+Mat2D mat2d_stack(Mat2D *mat1, Mat2D *mat2, int axis)
+{
+    Mat2D out;
+    int n;
+    int m;
+    int p;
+    int i;
+    int j;
+    switch (axis)
+    {
+    case 0:
+        if (mat1->n_cols != mat2->n_cols)
+        {
+            out = mat2d_empty();
+            break;
+        }
+        n = mat1->n_rows;
+        m = mat1->n_cols;
+        p = mat2->n_rows;
+
+        out.size = mat1->size + mat2->size;
+        out.n_rows = n + p;
+        out.n_cols = m;
+        out.array = arr2d_malloc(n + p, m);
+
+        for (i = 0; i < n; i++)
+        {
+            for (j = 0; j < m; j++)
+            {
+                out.array[i][j] = mat1->array[i][j];
+            }
+        }
+        for (i = 0; i < p; i++)
+        {
+            for (j = 0; j < m; j++)
+            {
+                out.array[n + i][j] = mat1->array[i][j];
+            }
+        }
+        break;
+
+    case 1:
+        if (mat1->n_rows != mat2->n_rows)
+        {
+            out = mat2d_empty();
+            break;
+        }
+        n = mat1->n_rows;
+        m = mat1->n_cols;
+        p = mat2->n_cols;
+
+        out.size = mat1->size + mat2->size;
+        out.n_rows = n;
+        out.n_cols = m + p;
+        out.array = arr2d_malloc(n, m + p);
+
+        for (i = 0; i < n; i++)
+        {
+            for (j = 0; j < m; j++)
+            {
+                out.array[i][j] = mat1->array[i][j];
+            }
+            for (j = 0; j < p; j++)
+            {
+                out.array[i][m + j] = mat2->array[i][j];
+            }
+        }
+        break;
+
+    default:
+        out = mat2d_empty();
+        break;
+    }
+
+    return out;
+}
+
+Mat2D mat2d_transpose(Mat2D *mat)
+{
+    Mat2D out;
+
+    int n = mat->n_cols;
+    int m = mat->n_rows;
+
+    out.size = mat->size;
+    out.n_rows = n;
+    out.n_cols = m;
+    out.array = arr2d_malloc(n, m);
+
+    int i;
+    int j;
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            out.array[i][j] = mat->array[j][i];
+        }
+    }
+
+    return out;
+}
+
+Mat2D mat2d_multiply(Mat2D *mat1, Mat2D *mat2)
 {
     Mat2D out;
     // Wrong matrices shapes
-    if (m1->n_cols != m2->n_rows)
+    if (mat1->n_cols != mat2->n_rows)
     {
         out = mat2d_empty();
         return out;
     }
-    int n = m1->n_rows;
-    int m = m1->n_cols;
-    int p = m2->n_cols;
+    int n = mat1->n_rows;
+    int m = mat1->n_cols;
+    int p = mat2->n_cols;
     out.size = n * p;
     out.n_rows = n;
     out.n_cols = p;
@@ -123,7 +225,7 @@ Mat2D mat2d_mul(Mat2D *m1, Mat2D *m2)
             sum = 0;
             for (k = 0; k < m; k++)
             {
-                sum += m1->array[i][k] * m2->array[k][j];
+                sum += mat1->array[i][k] * mat2->array[k][j];
             }
             out.array[i][j] = sum;
         }
