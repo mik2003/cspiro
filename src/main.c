@@ -12,8 +12,8 @@ int main()
 {
     // Numerator of k fraction corresponds to the spirograph periodicity.
     float l = 1.0;
-    int k_n = 1;
-    int k_d = 3;
+    int k_n = 13;
+    int k_d = 37;
     float k = (float)k_n / k_d;
     int precision = 120;
     int size = 500;
@@ -25,7 +25,16 @@ int main()
 
     // Generate SVG path
     char *svg_path = generate_svg_path(spiro.array[0], spiro.array[1], spiro.n_cols);
-    generate_svg(svg_path, size);
+    char filename[] = "./out/test.svg";
+    int result = generate_svg(filename, svg_path, size);
+    if (result == 0)
+    {
+        printf("SVG file \"%s\" generated successfully.\n", filename);
+    }
+    else
+    {
+        printf("Failed to generate SVG file \"%s\".\n", filename);
+    }
     free(svg_path);
 
     mat2d_free(&t);

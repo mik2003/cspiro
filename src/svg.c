@@ -46,53 +46,24 @@ char *generate_svg_path(float *x, float *y, int n)
     return path;
 }
 
-int generate_svg(char *svg_path, int size)
+int generate_svg(const char *filename, char *svg_path, int size)
 {
-    if (svg_path == NULL)
+    if (filename == NULL || svg_path == NULL)
     {
-        return -1; // Error: svg_path is NULL
+        return -1; // Error: filename or svg_path is NULL
     }
 
-    printf("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"%d\" height=\"%d\">\n", size, size);
-    printf("<path d=\"%s\" fill=\"none\" stroke=\"black\" />\n", svg_path);
-    printf("</svg>\n");
+    FILE *file = fopen(filename, "w");
+    if (file == NULL)
+    {
+        return -2; // Error: Failed to open file
+    }
+
+    fprintf(file, "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"%d\" height=\"%d\">\n", size, size);
+    fprintf(file, "<path d=\"%s\" fill=\"none\" stroke=\"black\" />\n", svg_path);
+    fprintf(file, "</svg>\n");
+
+    fclose(file);
 
     return 0;
 }
-
-// char *generate_svg_path(float *x, float *y, int n)
-// {
-//     char *path = (char *)malloc(n * 100 * sizeof(char)); // Assuming a maximum of 40 characters per point
-//     char temp[100];
-//     int len = snprintf(path, 100, "M%.6f,%.6f", x[0], y[0]); // Move to the first point
-//     if (len >= 100)
-//     {
-//         free(path);
-//         return NULL; // Error: buffer overflow
-//     }
-//     for (int i = 1; i < n; i++)
-//     {
-//         len = snprintf(temp, 100, " L%.6f,%.6f", x[i], y[i]); // Line to the next point
-//         if (len >= 100)
-//         {
-//             free(path);
-//             return NULL; // Error: buffer overflow
-//         }
-//         strcat(path, temp);
-//     }
-
-//     return path;
-// }
-
-// int generate_svg(char *svg_path, int size)
-// {
-//     if (svg_path == NULL)
-//     {
-//         return -1; // Error: svg_path is NULL
-//     }
-//     printf("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"%d\" height=\"%d\">\n", size, size);
-//     printf("<path d=\"%s\" fill=\"none\" stroke=\"black\" />\n", svg_path);
-//     printf("</svg>\n");
-
-//     return 0;
-// }
