@@ -33,6 +33,7 @@ int mat2d_free(Mat2D *mat)
         free(mat->array[i]);
     }
     free(mat->array);
+    free(mat);
     return 0;
 }
 
@@ -44,7 +45,7 @@ int mat2d_print(Mat2D *mat)
     {
         for (j = 0; j < mat->n_cols; j++)
         {
-            printf("%8.2f", mat->array[i][j]);
+            printf("%10.6f", mat->array[i][j]);
         }
         printf("\n");
     }
