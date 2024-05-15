@@ -70,7 +70,8 @@ Mat2D mat2d_new(int n_rows, int n_cols)
 
 Mat2D mat2d_zeros(int n_rows, int n_cols)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
+    out.size = n_rows * n_cols;
     out.n_rows = n_rows;
     out.n_cols = n_cols;
 
@@ -78,7 +79,6 @@ Mat2D mat2d_zeros(int n_rows, int n_cols)
     out.array = arr2d_malloc(n_rows, n_cols);
     if (out.array == NULL)
     {
-        out = mat2d_empty();
         return out;
     }
     else
@@ -98,7 +98,8 @@ Mat2D mat2d_zeros(int n_rows, int n_cols)
 
 Mat2D mat2d_ones(int n_rows, int n_cols)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
+    out.size = n_rows * n_cols;
     out.n_rows = n_rows;
     out.n_cols = n_cols;
 
@@ -106,7 +107,6 @@ Mat2D mat2d_ones(int n_rows, int n_cols)
     out.array = arr2d_malloc(n_rows, n_cols);
     if (out.array == NULL)
     {
-        out = mat2d_empty();
         return out;
     }
     else
@@ -126,7 +126,7 @@ Mat2D mat2d_ones(int n_rows, int n_cols)
 
 Mat2D mat2d_copy(Mat2D *mat)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
 
     int m = mat->n_rows;
     int n = mat->n_cols;
@@ -151,7 +151,7 @@ Mat2D mat2d_copy(Mat2D *mat)
 
 Mat2D mat2d_stack(Mat2D *mat1, Mat2D *mat2, int axis)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
     int m;
     int n;
     int p;
@@ -162,7 +162,6 @@ Mat2D mat2d_stack(Mat2D *mat1, Mat2D *mat2, int axis)
     case 0:
         if (mat1->n_cols != mat2->n_cols)
         {
-            out = mat2d_empty();
             break;
         }
         m = mat1->n_rows;
@@ -193,7 +192,6 @@ Mat2D mat2d_stack(Mat2D *mat1, Mat2D *mat2, int axis)
     case 1:
         if (mat1->n_rows != mat2->n_rows)
         {
-            out = mat2d_empty();
             break;
         }
         m = mat1->n_rows;
@@ -219,7 +217,6 @@ Mat2D mat2d_stack(Mat2D *mat1, Mat2D *mat2, int axis)
         break;
 
     default:
-        out = mat2d_empty();
         break;
     }
 
@@ -228,7 +225,7 @@ Mat2D mat2d_stack(Mat2D *mat1, Mat2D *mat2, int axis)
 
 Mat2D mat2d_transpose(Mat2D *mat)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
 
     int m = mat->n_cols;
     int n = mat->n_rows;
@@ -321,11 +318,10 @@ Mat2D mat2d_divide_float(Mat2D *mat, float f)
 
 Mat2D mat2d_add(Mat2D *mat1, Mat2D *mat2)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
     // Wrong matrices shapes
     if ((mat1->n_cols != mat2->n_cols) | (mat1->n_rows != mat2->n_rows))
     {
-        out = mat2d_empty();
         return out;
     }
 
@@ -338,7 +334,6 @@ Mat2D mat2d_add(Mat2D *mat1, Mat2D *mat2)
     out.array = arr2d_malloc(m, n);
     if (out.array == NULL)
     {
-        out = mat2d_empty();
         return out;
     }
 
@@ -357,11 +352,10 @@ Mat2D mat2d_add(Mat2D *mat1, Mat2D *mat2)
 
 Mat2D mat2d_subtract(Mat2D *mat1, Mat2D *mat2)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
     // Wrong matrices shapes
     if ((mat1->n_cols != mat2->n_cols) | (mat1->n_rows != mat2->n_rows))
     {
-        out = mat2d_empty();
         return out;
     }
 
@@ -374,7 +368,6 @@ Mat2D mat2d_subtract(Mat2D *mat1, Mat2D *mat2)
     out.array = arr2d_malloc(m, n);
     if (out.array == NULL)
     {
-        out = mat2d_empty();
         return out;
     }
 
@@ -393,11 +386,10 @@ Mat2D mat2d_subtract(Mat2D *mat1, Mat2D *mat2)
 
 Mat2D mat2d_multiply(Mat2D *mat1, Mat2D *mat2)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
     // Wrong matrices shapes
     if (mat1->n_cols != mat2->n_rows)
     {
-        out = mat2d_empty();
         return out;
     }
 
@@ -411,7 +403,6 @@ Mat2D mat2d_multiply(Mat2D *mat1, Mat2D *mat2)
     out.array = arr2d_malloc(m, p);
     if (out.array == NULL)
     {
-        out = mat2d_empty();
         return out;
     }
 
@@ -437,7 +428,7 @@ Mat2D mat2d_multiply(Mat2D *mat1, Mat2D *mat2)
 
 Mat2D mat2d_sin(Mat2D *mat)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
 
     int m = mat->n_rows;
     int n = mat->n_cols;
@@ -462,7 +453,7 @@ Mat2D mat2d_sin(Mat2D *mat)
 
 Mat2D mat2d_cos(Mat2D *mat)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
 
     int m = mat->n_rows;
     int n = mat->n_cols;

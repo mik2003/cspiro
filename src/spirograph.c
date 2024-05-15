@@ -5,7 +5,7 @@
 
 Mat2D angles(float ti, float tf, int n)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
     out.size = n + 1;
     out.n_rows = 1;
     out.n_cols = n + 1;
@@ -23,10 +23,9 @@ Mat2D angles(float ti, float tf, int n)
 
 Mat2D spirograph(float l, float k, Mat2D *t)
 {
-    Mat2D out;
+    Mat2D out = mat2d_empty();
     if (t->n_rows != 1)
     {
-        out = mat2d_empty();
         return out;
     }
 
