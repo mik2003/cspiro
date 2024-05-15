@@ -5,6 +5,9 @@
         "type_traits": "c",
         "vector": "c",
         "xstring": "c",
-        "xutility": "c"
-    }
+        "xutility": "c",
+        "string.h": "c",
+        "math.h": "c"
+    },
+    "cmake.configureOnOpen": true
 }
