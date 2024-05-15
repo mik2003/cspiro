@@ -12,9 +12,6 @@ Mat2D translate_2d(Mat2D *mat, float tx, float ty)
     {
         return out;
     }
-    out.size = mat->size;
-    out.n_rows = mat->n_rows;
-    out.n_cols = mat->n_cols;
 
     Mat2D translation_matrix = mat2d_zeros(3, 3);
     translation_matrix.array[0][0] = 1;
@@ -28,7 +25,7 @@ Mat2D translate_2d(Mat2D *mat, float tx, float ty)
     translation_matrix.array[2][2] = 1;
 
     Mat2D temp = mat2d_multiply(&translation_matrix, mat);
-    out.array = temp.array;
+    out = mat2d_copy(&temp);
 
     mat2d_free(&translation_matrix);
     mat2d_free(&temp);
@@ -43,9 +40,6 @@ Mat2D rotate_2d(Mat2D *mat, float r)
     {
         return out;
     }
-    out.size = mat->size;
-    out.n_rows = mat->n_rows;
-    out.n_cols = mat->n_cols;
 
     Mat2D rotation_matrix = mat2d_zeros(3, 3);
     rotation_matrix.array[0][0] = cos(r);
@@ -59,7 +53,7 @@ Mat2D rotate_2d(Mat2D *mat, float r)
     rotation_matrix.array[2][2] = 1;
 
     Mat2D temp = mat2d_multiply(&rotation_matrix, mat);
-    out.array = temp.array;
+    out = mat2d_copy(&temp);
 
     mat2d_free(&rotation_matrix);
     mat2d_free(&temp);
@@ -74,9 +68,6 @@ Mat2D scale_2d(Mat2D *mat, float sx, float sy)
     {
         return out;
     }
-    out.size = mat->size;
-    out.n_rows = mat->n_rows;
-    out.n_cols = mat->n_cols;
 
     Mat2D scale_matrix = mat2d_zeros(3, 3);
     scale_matrix.array[0][0] = sx;
@@ -90,7 +81,7 @@ Mat2D scale_2d(Mat2D *mat, float sx, float sy)
     scale_matrix.array[2][2] = 1;
 
     Mat2D temp = mat2d_multiply(&scale_matrix, mat);
-    out.array = temp.array;
+    out = mat2d_copy(&temp);
 
     mat2d_free(&scale_matrix);
     mat2d_free(&temp);

@@ -54,32 +54,6 @@ Mat2D spirograph(float l, float k, Mat2D *t)
 
     out = mat2d_stack(&xy, &o, 0);
 
-    // printf("sint =\n");
-    // mat2d_print(&sint);
-    // printf("cost =\n");
-    // mat2d_print(&cost);
-    // printf("omk = %f\n", omk);
-    // printf("lk = %f\n", lk);
-    // printf("omkdk = %f\n", omkdk);
-    // printf("omkdkt =\n");
-    // mat2d_print(&omkdkt);
-    // printf("sinomkdkt =\n");
-    // mat2d_print(&sinomkdkt);
-    // printf("cosomkdkt =\n");
-    // mat2d_print(&cosomkdkt);
-    // printf("omksint =\n");
-    // mat2d_print(&omksint);
-    // printf("omkcost =\n");
-    // mat2d_print(&omkcost);
-    // printf("lksinomkdkt =\n");
-    // mat2d_print(&lksinomkdkt);
-    // printf("lkcosomkdkt =\n");
-    // mat2d_print(&lkcosomkdkt);
-    // printf("x =\n");
-    // mat2d_print(&x);
-    // printf("y =\n");
-    // mat2d_print(&y);
-
     mat2d_free(&sint);
     mat2d_free(&cost);
     mat2d_free(&omkdkt);
