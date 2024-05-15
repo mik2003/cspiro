@@ -17,7 +17,7 @@ SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 
 # Flags
-CFLAGS := -Wall -I$(INCDIR) -g
+CFLAGS := -Wall -I$(INCDIR) -s
 
 # Libraries
 LIBS := -lm
