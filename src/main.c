@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 
 int main()
 {
@@ -76,6 +77,8 @@ int main()
         valid_input = 1; // All inputs are valid
     }
 
+    clock_t start_time = clock();
+
     // Numerator of k fraction corresponds to the spirograph periodicity.
     float k = (float)k_n / k_d;
 
@@ -102,6 +105,10 @@ int main()
     mat2d_free(&spiro_temp_0);
     mat2d_free(&spiro_temp_1);
     mat2d_free(&spiro);
+
+    clock_t end_time = clock();
+    float execution_time = (float)(end_time - start_time) / CLOCKS_PER_SEC;
+    printf("Execution time: %.3f ms.\n", execution_time * 1000);
 
     return 0;
 }
