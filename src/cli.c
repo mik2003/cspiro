@@ -22,6 +22,7 @@ void description_spirograph()
 
 void description_epicycle()
 {
+    printf("An epicycle is constructed from a set of circles, where the firs circle's center is fixed at the origin and each next circle is connected to a point on the previous circle's circumference. Each circle accepts three variables, the radius, the angular velocity, and the initial rotation.\n\n");
 }
 
 int select_mode()
