@@ -11,7 +11,8 @@
         "circle.h": "c",
         "util.h": "c",
         "matrix.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "stdbool.h": "c"
     },
     "cmake.configureOnOpen": true
 }
