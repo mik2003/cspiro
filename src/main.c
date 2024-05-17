@@ -2,6 +2,7 @@
 #include "spirograph.h"
 #include "svg.h"
 #include "transform.h"
+#include "epicycle.h"
 
 #define _USE_MATH_DEFINES
 #include <stdlib.h>
@@ -103,13 +104,13 @@ int main()
         // Numerator of k fraction corresponds to the spirograph periodicity.
         float k = (float)k_n / k_d;
 
-        Mat2D t = angles(0, k_n * 2 * M_PI, precision * k_n);
-        Mat2D spiro_temp_0 = spirograph(l, k, &t);
-        Mat2D spiro_temp_1 = translate_2d(&spiro_temp_0, 1, 1);
-        Mat2D spiro = scale_2d(&spiro_temp_1, size / 2, size / 2);
+        Mat2D *t = angles(0, k_n * 2 * M_PI, precision * k_n);
+        Mat2D *spiro_temp_0 = spirograph(l, k, t);
+        Mat2D *spiro_temp_1 = translate_2d(spiro_temp_0, 1, 1);
+        Mat2D *spiro = scale_2d(spiro_temp_1, size / 2, size / 2);
 
         // Generate SVG path
-        char *svg_path = generate_svg_path(spiro.array[0], spiro.array[1], spiro.n_cols);
+        char *svg_path = generate_svg_path(spiro->array[0], spiro->array[1], spiro->n_cols);
         char filename[] = "./out/spiro.svg";
         int result = generate_svg(filename, svg_path, size);
         if (result == 0)
@@ -122,10 +123,10 @@ int main()
         }
         free(svg_path);
 
-        mat2d_free(&t);
-        mat2d_free(&spiro_temp_0);
-        mat2d_free(&spiro_temp_1);
-        mat2d_free(&spiro);
+        mat2d_free(t);
+        mat2d_free(spiro_temp_0);
+        mat2d_free(spiro_temp_1);
+        mat2d_free(spiro);
 
         clock_t end_time = clock();
         float execution_time = (float)(end_time - start_time) / CLOCKS_PER_SEC;
@@ -133,7 +134,46 @@ int main()
     }
     else if (mode == 1)
     {
-        printf("Epicycle not yet implemented!\n");
+        clock_t start_time = clock();
+
+        int svg_size = 500; // [px]
+        float t_0 = 0.0;    // [s]
+        float t_f = 10.0;   // [s]
+        int steps = 1000;
+
+        Epicycle *e = epicycle_init();
+        Mat2D *time = mat2d_range(t_0, t_f, steps); // Times [s]
+        epicycle_assign_t(e, time);
+        epicycle_add_new_circle(e, 100.0, 1.0, 0.0);
+        epicycle_add_new_circle(e, 50.0, 2.0, 0.0);
+
+        Mat2D *ec_temp = epicycle(e);
+        if (ec_temp->array == NULL)
+        {
+            printf("Invalid epicycle.\n");
+        }
+        Mat2D *ec = translate_2d(ec_temp, svg_size / 2, svg_size / 2);
+
+        // Generate SVG path
+        char *svg_path = generate_svg_path(ec->array[0], ec->array[1], steps);
+        char filename[] = "./out/epicycle.svg";
+        int result = generate_svg(filename, svg_path, svg_size);
+        if (result == 0)
+        {
+            printf("SVG file \"%s\" generated successfully.\n", filename);
+        }
+        else
+        {
+            printf("Failed to generate SVG file \"%s\".\n", filename);
+        }
+        free(svg_path);
+
+        epicycle_free(e);
+        mat2d_free(ec);
+
+        clock_t end_time = clock();
+        float execution_time = (float)(end_time - start_time) / CLOCKS_PER_SEC;
+        printf("Execution time: %.3f ms.\n", execution_time * 1000);
     }
 
     return 0;

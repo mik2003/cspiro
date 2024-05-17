@@ -3,25 +3,39 @@
 #include <stdlib.h>
 #include <math.h>
 
-Circle circle_init()
+Circle *circle_init(float radius, float speed, float angle_i)
 {
-    Circle c;
+    Circle *out = (Circle *)malloc(sizeof(Circle));
+    if (out == NULL)
+    {
+        return NULL;
+    }
 
     // Initialize circle properties
-    c.speed = 0.0f;
-    c.radius = 0.0f;
-    c.angle_i = 0.0f;
-    c.angle = 0.0f;
-    c.local_x = 0.0f;
-    c.local_y = 0.0f;
+    out->speed = speed;
+    out->radius = radius;
+    out->angle_i = angle_i;
+    out->angle = NULL;
+    out->local_x = NULL;
+    out->local_y = NULL;
 
-    return c;
+    return out;
 }
 
-int circle_update(Circle *c, float t)
+int circle_free(Circle *c)
+{
+    free(c->angle);
+    free(c->local_x);
+    free(c->local_y);
+    free(c);
+
+    return 0;
+}
+
+int circle_update(Circle *c, Mat2D *t)
 {
     // Check for invalid input
-    if (c == NULL || t < 0.0f)
+    if (c == NULL || t == NULL || t->n_rows != 1)
         return CIRCLE_ERROR_INVALID_INPUT;
 
     // Update angle, local_x, and local_y
@@ -42,14 +56,19 @@ int circle_update(Circle *c, float t)
     return CIRCLE_SUCCESS;
 }
 
-int circle_update_angle(Circle *c, float t)
+int circle_update_angle(Circle *c, Mat2D *t)
 {
     // Check for invalid input
     if (c == NULL)
         return CIRCLE_ERROR_INVALID_INPUT;
 
     // Update angle
-    c->angle = c->angle_i + c->speed * t;
+    Mat2D *relative_angle = mat2d_multiply_float(t, c->speed);
+    Mat2D *absolute_angle = mat2d_add_float(relative_angle, c->angle_i);
+
+    c->angle = absolute_angle;
+
+    mat2d_free(relative_angle);
 
     // Return success
     return CIRCLE_SUCCESS;
@@ -62,7 +81,12 @@ int circle_update_local_x(Circle *c)
         return CIRCLE_ERROR_INVALID_INPUT;
 
     // Update local_x
-    c->local_x = c->radius * cos(c->angle);
+    Mat2D *cos_angle = mat2d_cos(c->angle);
+    Mat2D *rcos_angle = mat2d_multiply_float(cos_angle, c->radius);
+
+    c->local_x = rcos_angle;
+
+    mat2d_free(cos_angle);
 
     // Return success
     return CIRCLE_SUCCESS;
@@ -74,8 +98,13 @@ int circle_update_local_y(Circle *c)
     if (c == NULL)
         return CIRCLE_ERROR_INVALID_INPUT;
 
-    // Update local_y
-    c->local_y = c->radius * sin(c->angle);
+    // Update local_x
+    Mat2D *sin_angle = mat2d_sin(c->angle);
+    Mat2D *rsin_angle = mat2d_multiply_float(sin_angle, c->radius);
+
+    c->local_y = rsin_angle;
+
+    mat2d_free(sin_angle);
 
     // Return success
     return CIRCLE_SUCCESS;
