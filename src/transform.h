@@ -3,6 +3,10 @@
 
 #include "matrix.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
 Mat2D *translate_2d(Mat2D *mat, float tx, float ty);
 Mat2D *rotate_2d(Mat2D *mat, float r);
 Mat2D *scale_2d(Mat2D *mat, float sx, float sy);

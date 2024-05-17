@@ -8,7 +8,10 @@
         "xutility": "c",
         "string.h": "c",
         "math.h": "c",
-        "circle.h": "c"
+        "circle.h": "c",
+        "util.h": "c",
+        "matrix.h": "c",
+        "stdio.h": "c"
     },
     "cmake.configureOnOpen": true
 }

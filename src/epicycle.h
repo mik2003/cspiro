@@ -3,6 +3,11 @@
 
 #include "circle.h"
 #include "matrix.h"
+#include "util.h"
+
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
 
 typedef struct
 {
@@ -25,5 +30,7 @@ int epicycle_add_existing_circles(Epicycle *e, int m, Circle *c);
 int epicycle_update_xy(Epicycle *e);
 
 Mat2D *epicycle(Epicycle *e);
+
+bool check_rational_relations_and_period(Epicycle *epicycle, float *period);
 
 #endif /* EPICYCLE_H */

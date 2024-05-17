@@ -1,7 +1,4 @@
 #include "epicycle.h"
-#include "circle.h"
-
-#include <stdlib.h>
 
 Epicycle *epicycle_init()
 {
@@ -165,4 +162,24 @@ Mat2D *epicycle(Epicycle *e)
     mat2d_free(o);
 
     return out;
+}
+
+bool check_rational_relations_and_period(Epicycle *epicycle, float *period)
+{
+    int lcm_denom = 1;
+    for (int i = 0; i < epicycle->n; ++i)
+    {
+        for (int j = i + 1; j < epicycle->n; ++j)
+        {
+            int num, denom;
+            if (!is_rationally_related(epicycle->circles[i].speed, epicycle->circles[j].speed, &num, &denom))
+            {
+                return false;
+            }
+            lcm_denom = lcm(lcm_denom, denom);
+        }
+    }
+
+    *period = 2 * M_PI * lcm_denom;
+    return true;
 }

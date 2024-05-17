@@ -1,9 +1,4 @@
 #include "transform.h"
-#include "matrix.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 
 Mat2D *translate_2d(Mat2D *mat, float tx, float ty)
 {

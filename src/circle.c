@@ -1,8 +1,5 @@
 #include "circle.h"
 
-#include <stdlib.h>
-#include <math.h>
-
 Circle *circle_init(float radius, float speed, float angle_i)
 {
     Circle *out = (Circle *)malloc(sizeof(Circle));

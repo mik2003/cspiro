@@ -7,6 +7,9 @@
 
 #include "matrix.h"
 
+#include <stdlib.h>
+#include <math.h>
+
 typedef struct
 {
     float radius;   // Radius

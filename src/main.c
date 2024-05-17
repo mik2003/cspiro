@@ -147,6 +147,17 @@ int main()
         epicycle_add_new_circle(e, 100.0, 1.0, 0.0);
         epicycle_add_new_circle(e, 50.0, 2.0, 0.0);
 
+        float period;
+        if (check_rational_relations_and_period(&epicycle, &period))
+        {
+            printf("All angular velocities are rationally related.\n");
+            printf("The period of the epicycle is: %f seconds\n", period);
+        }
+        else
+        {
+            printf("Some angular velocities are not rationally related.\n");
+        }
+
         Mat2D *ec_temp = epicycle(e);
         if (ec_temp->array == NULL)
         {

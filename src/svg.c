@@ -1,9 +1,5 @@
 #include "svg.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 // Function to generate SVG path string from x and y arrays
 char *generate_svg_path(float *x, float *y, int n)
 {
