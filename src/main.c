@@ -60,25 +60,13 @@ int main()
         float *speed = (float *)malloc(n * sizeof(float));
         float *angle_i = (float *)malloc(n * sizeof(float));
 
-        input_epicycle_data(n, radius, speed, angle_i);
+        float period = input_epicycle_data(n, radius, speed, angle_i);
 
         clock_t start_time = clock();
 
-        float period;
-        if (check_rational_relations_and_period(n, speed, &period))
-        {
-            printf("All angular velocities are rationally related.\n");
-            printf("The period of the epicycle is: %f seconds\n", period);
-        }
-        else
-        {
-            printf("Some angular velocities are not rationally related.\n");
-            return -1;
-        }
-
-        int svg_size = 500;       // [px]
-        float t_0 = 0.0;          // [s]
-        float t_f = t_0 + period; // [s]
+        int svg_size = input_svg_size(); // [px]
+        float t_0 = 0.0;                 // [s]
+        float t_f = t_0 + period;        // [s]
         int steps = round(100 * period * arr_max(n, speed));
 
         Epicycle *e = epicycle_init();

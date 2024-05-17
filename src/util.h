@@ -4,6 +4,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <stdbool.h>
+#include <float.h>
 
 int gcd(int a, int b);                                                          // Greatest common divisor
 int lcm(int a, int b);                                                          // Least common multiple

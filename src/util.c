@@ -18,7 +18,7 @@ int lcm(int a, int b)
 
 bool is_rationally_related(float a, float b, int *numerator, int *denominator)
 {
-    const float tolerance = 1e-9;
+    const float tolerance = 1e-12;
 
     if (fabs(a) < tolerance || fabs(b) < tolerance)
     {
@@ -26,25 +26,37 @@ bool is_rationally_related(float a, float b, int *numerator, int *denominator)
     }
 
     float ratio = a / b;
-    float multiplier = 1.0;
+    int num, denom;
+    float closest_ratio;
+    float best_diff = FLT_MAX;
 
-    while (fabs(round(ratio * multiplier) - ratio * multiplier) > tolerance)
+    for (denom = 1; denom <= 1e6; ++denom)
     {
-        multiplier += 1.0;
-        if (multiplier > 1e6)
+        num = round(ratio * denom);
+        closest_ratio = (float)num / denom;
+        float diff = fabs(closest_ratio - ratio);
+
+        if (diff < tolerance)
         {
-            return false;
+            *numerator = num;
+            *denominator = denom;
+            return gcd(num, denom) == 1;
+        }
+
+        if (diff < best_diff)
+        {
+            best_diff = diff;
+            *numerator = num;
+            *denominator = denom;
         }
     }
 
-    *numerator = round(ratio * multiplier);
-    *denominator = round(multiplier);
-    return gcd(*numerator, *denominator) == 1;
+    return false;
 }
 
 bool check_rational_relations_and_period(int n, float *speed, float *period)
 {
-    int lcm_denom = 1;
+    int overall_lcm = 1;
     for (int i = 0; i < n; ++i)
     {
         for (int j = i + 1; j < n; ++j)
@@ -54,11 +66,11 @@ bool check_rational_relations_and_period(int n, float *speed, float *period)
             {
                 return false;
             }
-            lcm_denom = lcm(num, denom);
+            overall_lcm = lcm(overall_lcm, denom);
         }
     }
 
-    *period = 2 * M_PI * lcm_denom / arr_max(n, speed);
+    *period = 2 * M_PI * overall_lcm / arr_max(n, speed);
     return true;
 }
 

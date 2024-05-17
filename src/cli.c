@@ -151,64 +151,81 @@ int input_epicycle_n()
     return n;
 }
 
-void input_epicycle_data(int n, float *radius, float *speed, float *angle_i)
+float input_epicycle_data(int n, float *radius, float *speed, float *angle_i)
 {
-    int i = 0;
-    float r, s, a;
-    for (i = 0; i < n; i++)
+    float period;
+    while (1)
     {
-        // Input for radius
-        while (1)
+        int i = 0;
+        float r, s, a;
+        for (i = 0; i < n; i++)
         {
-            printf("Radius of circle %d: ", i);
-            if (scanf("%f", &r) != 1)
+            // Input for radius
+            while (1)
             {
-                printf("Invalid input. Please enter a number for the radius.\n");
-                while (getchar() != '\n')
-                    ; // Clear input buffer
+                printf("Radius of circle %d: ", i + 1);
+                if (scanf("%f", &r) != 1)
+                {
+                    printf("Invalid input. Please enter a number for the radius.\n");
+                    while (getchar() != '\n')
+                        ; // Clear input buffer
+                }
+                else
+                {
+                    radius[i] = r;
+                    break; // Exit the loop if input is valid
+                }
             }
-            else
+
+            // Input for angular velocity
+            while (1)
             {
-                radius[i] = r;
-                break; // Exit the loop if input is valid
+                printf("Angular velocity of circle %d: ", i + 1);
+                if (scanf("%f", &s) != 1)
+                {
+                    printf("Invalid input. Please enter a number for the angular velocity.\n");
+                    while (getchar() != '\n')
+                        ; // Clear input buffer
+                }
+                else
+                {
+                    speed[i] = s;
+                    break; // Exit the loop if input is valid
+                }
+            }
+
+            // Input for initial angle
+            while (1)
+            {
+                printf("Initial angle of circle %d: ", i + 1);
+                if (scanf("%f", &a) != 1)
+                {
+                    printf("Invalid input. Please enter a number for the initial angle.\n");
+                    while (getchar() != '\n')
+                        ; // Clear input buffer
+                }
+                else
+                {
+                    angle_i[i] = a;
+                    break; // Exit the loop if input is valid
+                }
             }
         }
+        printf("\n");
 
-        // Input for angular velocity
-        while (1)
+        if (check_rational_relations_and_period(n, speed, &period))
         {
-            printf("Angular velocity of circle %d: ", i);
-            if (scanf("%f", &s) != 1)
-            {
-                printf("Invalid input. Please enter a number for the angular velocity.\n");
-                while (getchar() != '\n')
-                    ; // Clear input buffer
-            }
-            else
-            {
-                speed[i] = s;
-                break; // Exit the loop if input is valid
-            }
+            printf("All angular velocities are rationally related.\n");
+            printf("The period of the epicycle is: %f seconds\n\n", period);
+            break;
         }
-
-        // Input for initial angle
-        while (1)
+        else
         {
-            printf("Initial angle of circle %d: ", i);
-            if (scanf("%f", &a) != 1)
-            {
-                printf("Invalid input. Please enter a number for the initial angle.\n");
-                while (getchar() != '\n')
-                    ; // Clear input buffer
-            }
-            else
-            {
-                angle_i[i] = a;
-                break; // Exit the loop if input is valid
-            }
+            printf("Some angular velocities are not rationally related. Input new values.\n\n");
         }
     }
-    printf("\n");
+
+    return period;
 }
 
 int input_svg_size()

@@ -1,6 +1,8 @@
 #ifndef CLI_H
 #define CLI_H
 
+#include "util.h"
+
 #include <stdio.h>
 #include <time.h>
 
@@ -16,7 +18,7 @@ int input_spirograph_k_d();
 int input_spirograph_precision();
 
 int input_epicycle_n();
-void input_epicycle_data(int n, float *radius, float *speed, float *angle_i);
+float input_epicycle_data(int n, float *radius, float *speed, float *angle_i);
 
 int input_svg_size();
 void output_svg_result(int result, char *filename);
