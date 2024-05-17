@@ -5,13 +5,8 @@
 #include "matrix.h"
 #include "util.h"
 
-#include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
 
 typedef struct
 {
@@ -28,13 +23,12 @@ int epicycle_free(Epicycle *e);
 int epicycle_free_circles(Epicycle *e);
 
 int epicycle_add_new_circle(Epicycle *e, float radius, float speed, float angle_i);
+int epicycle_add_new_circles(Epicycle *e, int n, float *radius, float *speed, float *angle_i);
 int epicycle_add_existing_circle(Epicycle *e, Circle *c);
 int epicycle_add_existing_circles(Epicycle *e, int m, Circle *c);
 
 int epicycle_update_xy(Epicycle *e);
 
 Mat2D *epicycle(Epicycle *e);
-
-bool check_rational_relations_and_period(Epicycle *epicycle, float *period);
 
 #endif /* EPICYCLE_H */

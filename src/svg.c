@@ -56,7 +56,7 @@ int generate_svg(const char *filename, char *svg_path, int size)
     }
 
     fprintf(file, "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"%d\" height=\"%d\">\n", size, size);
-    fprintf(file, "<path d=\"%s\" fill=\"none\" stroke=\"black\" />\n", svg_path);
+    fprintf(file, "<path d=\"%s z\" fill=\"none\" stroke=\"black\" />\n", svg_path);
     fprintf(file, "</svg>\n");
 
     fclose(file);

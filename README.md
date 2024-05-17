@@ -1,6 +1,10 @@
 # cspiro
 Welcome to cspiro, a command-line tool for making spirographs.
 The mathematical basis of the program follows the definitions laid out in the [Spirograph Wikipedia page](https://en.wikipedia.org/wiki/Spirograph#Mathematical_basis)
+
+There are two different drawing modes, spirograph and epicycle. An epicycle is a more general version of a spirograph and gives the user more control, its mathematical basis can be found on the [Epicycle Wikipedia page](https://en.wikipedia.org/wiki/Deferent_and_epicycle#Mathematical_formalism).
+
+## Spirograph
 Some important definitions:
 - C_o : Fixed outer circle.
 - C_i : Smaller inner circle that rolls inside C_o without slipping.

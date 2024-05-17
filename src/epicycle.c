@@ -80,6 +80,17 @@ int epicycle_add_new_circle(Epicycle *e, float radius, float speed, float angle_
                                : 0;
 }
 
+int epicycle_add_new_circles(Epicycle *e, int n, float *radius, float *speed, float *angle_i)
+{
+    int i;
+    for (i = 0; i < n; i++)
+    {
+        epicycle_add_new_circle(e, radius[i], speed[i], angle_i[i]);
+    }
+
+    return 0;
+}
+
 int epicycle_add_existing_circle(Epicycle *e, Circle *c)
 {
     epicycle_add_existing_circles(e, 1, c);
@@ -162,24 +173,4 @@ Mat2D *epicycle(Epicycle *e)
     mat2d_free(o);
 
     return out;
-}
-
-bool check_rational_relations_and_period(Epicycle *epicycle, float *period)
-{
-    int lcm_denom = 1;
-    for (int i = 0; i < epicycle->n; ++i)
-    {
-        for (int j = i + 1; j < epicycle->n; ++j)
-        {
-            int num, denom;
-            if (!is_rationally_related(epicycle->circles[i].speed, epicycle->circles[j].speed, &num, &denom))
-            {
-                return false;
-            }
-            lcm_denom = lcm(lcm_denom, denom);
-        }
-    }
-
-    *period = 2 * M_PI * lcm_denom;
-    return true;
 }
