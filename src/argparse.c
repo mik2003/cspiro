@@ -5,13 +5,12 @@
 #include <stdio.h>
 #include <string.h>
 
-int argparse(int argc,                                                             // Number of strings in array argv
-             char *argv[],                                                         // Array of command-line argument strings
-             char **envp,                                                          // Array of environment variable strings
-             int *mode, int *cli_mode, int *precision, int *size,                  // General variables
-             float *l, int *k_n, int *k_d,                                         // Spirograph variables
-             float *period, int *n, float **radius, float **speed, float **angle_i // Epicycle variables
-)
+int argparse(int argc,
+             char *argv[],
+             char **envp,
+             int *mode, int *cli_mode, int *precision, int *size,
+             float *l, int *k_n, int *k_d,
+             float *period, int *n, float **radius, float **speed, float **angle_i)
 {
     if (argc > 1)
     {
