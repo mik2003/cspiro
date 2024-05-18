@@ -32,7 +32,7 @@ If previous option is set:
   -m, --mode, -?    Set drawing mode for the --no-cli option.
         int       : 0 for spirograph, 1 for epicycle.
 If spirograph (see README for detailed description):
-        float     : l, ratio between rho and R.
+        float     : l, ratio between rho and r.
         int       : k_n, numerator of k.
         int       : k_d, denominator of k.
         int       : precision.

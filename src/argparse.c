@@ -210,7 +210,7 @@ void output_help()
     printf("  -m, --mode, -?    Set drawing mode for the --no-cli option.\n");
     printf("        int       : 0 for spirograph, 1 for epicycle.\n");
     printf("If spirograph (see README for detailed description):\n");
-    printf("        float     : l, ratio between rho and R.\n");
+    printf("        float     : l, ratio between rho and r.\n");
     printf("        int       : k_n, numerator of k.\n");
     printf("        int       : k_d, denominator of k.\n");
     printf("        int       : precision.\n");
