@@ -3,10 +3,6 @@
 
 #include "circle.h"
 #include "matrix.h"
-#include "util.h"
-
-#include <stdlib.h>
-#include <stdbool.h>
 
 typedef struct
 {

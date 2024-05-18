@@ -1,9 +1,6 @@
 #ifndef CLI_H
 #define CLI_H
 
-#include "util.h"
-
-#include <stdio.h>
 #include <time.h>
 
 void description();

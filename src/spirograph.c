@@ -1,5 +1,8 @@
 #include "matrix.h"
 
+#include <math.h>
+#include <stdio.h>
+
 Mat2D *angles(float ti, float tf, int n)
 {
     return mat2d_range(ti, tf, n);

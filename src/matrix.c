@@ -1,5 +1,9 @@
 #include "matrix.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
 float **arr2d_malloc(int n_rows, int n_cols)
 {
     float **arr = (float **)malloc(n_rows * sizeof(float *));

@@ -1,5 +1,9 @@
 #include "transform.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
 Mat2D *translate_2d(Mat2D *mat, float tx, float ty)
 {
     if (mat->n_rows != 3)

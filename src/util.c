@@ -1,5 +1,10 @@
 #include "util.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <stdbool.h>
+#include <float.h>
+
 int gcd(int a, int b)
 {
     while (b != 0)

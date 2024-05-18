@@ -1,4 +1,8 @@
 #include "cli.h"
+#include "util.h"
+
+#include <stdio.h>
+#include <time.h>
 
 void description()
 {
