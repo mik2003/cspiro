@@ -19,7 +19,7 @@
  *     Elements can be accessed as a 2-dimensional array
  *     `array[i][j]` for row `i` and column `j`.
  */
-typedef struct
+typedef struct Mat2D
 {
     int size;
     int n_rows;

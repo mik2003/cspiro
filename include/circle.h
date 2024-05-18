@@ -7,7 +7,7 @@
 
 #include "matrix.h"
 
-typedef struct
+typedef struct Circle
 {
     float radius;   // Radius
     float speed;    // Angular velocity [rad/s]

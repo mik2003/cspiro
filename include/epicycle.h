@@ -4,7 +4,7 @@
 #include "circle.h"
 #include "matrix.h"
 
-typedef struct
+typedef struct Epicycle
 {
     int n;           // Number of circles
     Circle *circles; // List of circles
