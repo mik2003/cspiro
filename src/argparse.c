@@ -202,7 +202,26 @@ int argparse(int argc,                                                          
 
 void output_help()
 {
-    printf(".\n");
+    printf("Usage: cspiro [options]\n");
+    printf("Options:\n");
+    printf("  -h, --help, -?\tPrint this message and exit.\n");
+    printf("  -x, --no-cli, -?\tUse app without command line interface. Must specify other arguments.\n");
+    printf("If previous option is set:\n");
+    printf("  -m, --mode, -?\tSet drawing mode for the --no-cli option.\n");
+    printf("\t\t\tint : 0 for spirograph, 1 for epicycle.\n");
+    printf("If spirograph (see README for detailed description):\n");
+    printf("\t\t\tfloat : l, ratio between rho and R.\n");
+    printf("\t\t\tint : k_n, numerator of k.\n");
+    printf("\t\t\tint : k_d, denominator of k.\n");
+    printf("\t\t\tint : precision.\n");
+    printf("\t\t\tint : size, output SVG size.\n");
+    printf("If epicycle:\n");
+    printf("\t\t\tint : n, number of construction circles, must be at least 2.\n");
+    printf("\t\t\tfloat,... : radius, comma separated list of circle radii [px], must be of length n.\n");
+    printf("\t\t\tfloat,... : speed, comma separated list of circle angular velocities [rad/s], must be of length n.\n");
+    printf("\t\t\tfloat,... : angle_i, comma separated list of circle initial angles [rad], must be of length n.\n");
+    printf("\t\t\tint : size, output SVG size.\n");
+    printf("\n");
 }
 
 void output_wrong_arguments()

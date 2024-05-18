@@ -9,7 +9,7 @@ BINDIR := bin
 LIBDIR := lib
 
 # Targets
-TARGET := $(BINDIR)/cspiro_debug.exe
+TARGET := $(BINDIR)/cspiro.exe
 
 # Source files
 SRCEXT := c
@@ -17,7 +17,7 @@ SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 
 # Flags
-CFLAGS := -Wall -I$(INCDIR) -g
+CFLAGS := -Wall -I$(INCDIR) -s
 
 # Libraries
 LIBS := -lm

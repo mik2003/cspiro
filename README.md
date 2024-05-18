@@ -21,3 +21,26 @@ An epicycle is constructed from a set of circles, where the firs circle's center
 ## Usage
 Build the program using the `make` command. This builds the executable within the bin directory.
 To run the program use `.\bin\cspiro.exe`.
+
+Below the output of the help message.
+```
+Usage: cspiro [options]
+Options:
+  -h, --help, -?        Print this message and exit.
+  -x, --no-cli, -?      Use app without command line interface. Must specify other arguments.
+If previous option is set:
+  -m, --mode, -?        Set drawing mode for the --no-cli option.
+                        int : 0 for spirograph, 1 for epicycle.
+If spirograph (see README for detailed description):
+                        float : l, ratio between rho and R.
+                        int : k_n, numerator of k.
+                        int : k_d, denominator of k.
+                        int : precision.
+                        int : size, output SVG size.
+If epicycle:
+                        int : n, number of construction circles, must be at least 2.
+                        float,... : radius, comma separated list of circle radii [px], must be of length n.
+                        float,... : speed, comma separated list of circle angular velocities [rad/s], must be of length n.
+                        float,... : angle_i, comma separated list of circle initial angles [rad], must be of length n.
+                        int : size, output SVG size.
+```
