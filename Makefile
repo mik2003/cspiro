@@ -3,7 +3,7 @@ CC := gcc
 
 # Directories
 SRCDIR := src
-INCDIR := inc
+INCDIR := include
 BUILDDIR := build
 BINDIR := bin
 LIBDIR := lib

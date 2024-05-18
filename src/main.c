@@ -4,6 +4,7 @@
 #include "transform.h"
 #include "epicycle.h"
 #include "cli.h"
+#include "util.h"
 
 #define _USE_MATH_DEFINES
 #include <stdlib.h>
