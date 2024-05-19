@@ -19,8 +19,17 @@ Some important definitions:
 An epicycle is constructed from a set of circles, where the firs circle's center is fixed at the origin and each next circle is connected to a point on the previous circle's circumference. Each circle accepts three variables, the radius, the angular velocity, and the initial rotation.
 
 ## Usage
-Build the program using the `make` command. This builds the executable within the bin directory.
-To run the program use `.\bin\cspiro.exe`.
+The program uses CMake for building, once in the project directory use the following commands.
+
+```
+mkdir -p build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build .
+```
+
+If you want to also have a debug build use `-DCMAKE_BUILD_TYPE=Debug` instead.
+To run the program use `.\bin\cspiro.exe` (from within the build directory). For the debug build use `.\bin\cspiro_debug.exe`.
 
 Below the output of the help message.
 ```
