@@ -60,16 +60,6 @@ int input_spirograph_k_n();
 int input_spirograph_k_d();
 
 /**
- * Function for CLI input of spirograph precision.
- *
- * Returns
- * -------
- * int
- *     Spirograph precision
- */
-int input_spirograph_precision();
-
-/**
  * Function for CLI input of epicycle parameter n.
  *
  * Returns
@@ -99,6 +89,19 @@ int input_epicycle_n();
  *     Period of the epicycle (see `check_rational_relations_and_period`).
  */
 float input_epicycle_data(int n, float *radius, float *speed, float *angle_i);
+
+/**
+ * Function for CLI input of curve precision.
+ * Corresponds to the number of steps in the discretization
+ * per full revolution, for example a value of 120 mean there will be
+ * 120 points per revolution.
+ *
+ * Returns
+ * -------
+ * int
+ *     Spirograph precision
+ */
+int input_curve_precision();
 
 /**
  * Function for CLI input of svg size.

@@ -63,7 +63,7 @@ int argparse(int argc,
                         return -1;
                     }
                 }
-                else if (argc == 9 && strcmp(argv[3], "1") == 0)
+                else if (argc == 10 && strcmp(argv[3], "1") == 0)
                 {
                     // Epicycle mode
                     *mode = 1;
@@ -152,14 +152,14 @@ int argparse(int argc,
                         return -1;
                     }
 
-                    // *precision = strtol(argv[7], &endptr, 10);
-                    // if (*endptr != '\0')
-                    // {
-                    //     printf("Wrong argument for precision.\n");
-                    //     return -1;
-                    // }
+                    *precision = strtol(argv[8], &endptr, 10);
+                    if (*endptr != '\0')
+                    {
+                        printf("Wrong argument for precision.\n");
+                        return -1;
+                    }
 
-                    *size = strtol(argv[8], &endptr, 10);
+                    *size = strtol(argv[9], &endptr, 10);
                     if (*endptr != '\0')
                     {
                         printf("Wrong argument for size.\n");
@@ -219,6 +219,7 @@ void output_help()
     printf("        float,... : radius, comma separated list of circle radii [px], must be of length n.\n");
     printf("        float,... : speed, comma separated list of circle angular velocities [rad/s], must be of length n.\n");
     printf("        float,... : angle_i, comma separated list of circle initial angles [rad], must be of length n.\n");
+    printf("        int       : precision.\n");
     printf("        int       : size, output SVG size.\n");
     printf("\n");
 }

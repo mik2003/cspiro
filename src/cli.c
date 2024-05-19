@@ -115,26 +115,6 @@ int input_spirograph_k_d()
     return k_d;
 }
 
-int input_spirograph_precision()
-{
-    int precision;
-    while (1)
-    {
-        printf("Enter the precision (points per full rotation of the spirograph): ");
-        if (scanf("%d", &precision) != 1 || precision <= 0)
-        {
-            printf("Invalid input. Please enter a positive integer for the precision.\n");
-            while (getchar() != '\n')
-                ; // Clear input buffer
-        }
-        else
-        {
-            break;
-        }
-    }
-    return precision;
-}
-
 int input_epicycle_n()
 {
     int n;
@@ -231,6 +211,26 @@ float input_epicycle_data(int n, float *radius, float *speed, float *angle_i)
     }
 
     return period;
+}
+
+int input_curve_precision()
+{
+    int precision;
+    while (1)
+    {
+        printf("Enter the precision (points per full rotation): ");
+        if (scanf("%d", &precision) != 1 || precision <= 0)
+        {
+            printf("Invalid input. Please enter a positive integer for the precision.\n");
+            while (getchar() != '\n')
+                ; // Clear input buffer
+        }
+        else
+        {
+            break;
+        }
+    }
+    return precision;
 }
 
 int input_svg_size()

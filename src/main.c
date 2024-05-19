@@ -66,7 +66,7 @@ int main(int argc,     // Number of strings in array argv
             l = input_spirograph_l();
             k_n = input_spirograph_k_n();
             k_d = input_spirograph_k_d();
-            precision = input_spirograph_precision();
+            precision = input_curve_precision();
             size = input_svg_size();
         }
 
@@ -114,12 +114,13 @@ int main(int argc,     // Number of strings in array argv
             }
 
             period = input_epicycle_data(n, radius, speed, angle_i);
+            precision = input_curve_precision();
             size = input_svg_size();
         }
 
         float t_0 = 0.0;          // [s]
         float t_f = t_0 + period; // [s]
-        int steps = round(100 * period * arr_max(n, speed));
+        int steps = round(precision * period * arr_max(n, speed));
 
         clock_t start_time = clock();
 
