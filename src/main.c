@@ -120,7 +120,7 @@ int main(int argc,     // Number of strings in array argv
 
         float t_0 = 0.0;          // [s]
         float t_f = t_0 + period; // [s]
-        int steps = round(precision * period * arr_max(n, speed));
+        int steps = round(precision * period * arr_min(n, speed));
 
         clock_t start_time = clock();
 

@@ -37,3 +37,21 @@ set_target_properties(cspiro PROPERTIES COMPILE_FLAGS "-s")
 # Link libraries
 target_link_libraries(cspiro m)
 target_link_libraries(cspiro_debug m)
+
+# TESTING
+include(CTest)
+
+# Include the Unity testing framework (adjust the path as needed)
+# include_directories(${CMAKE_SOURCE_DIR}/unity/src)
+
+# Add test files
+file(GLOB TEST_SOURCES "tests/*.c")
+
+# Add executable for running tests
+add_executable(runTests ${TEST_SOURCES} ${SOURCES})
+
+# Link the math library for tests
+target_link_libraries(runTests m)
+
+# Add tests to CTest
+add_test(NAME runTests COMMAND runTests)
