@@ -37,6 +37,7 @@ int mat2d_free(Mat2D *mat)
         free(mat->array);
     }
     free(mat);
+    mat = NULL;
 
     return 0;
 }
